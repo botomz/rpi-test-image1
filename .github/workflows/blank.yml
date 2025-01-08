@@ -1,38 +1,27 @@
 name: build
 on: workflow_dispatch
-
 jobs:
   build:
+    name : run_command
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: git_clone
         run: git clone https://github.com/Nature40/pimod.git
-      - name: do_apt-get
+      - name: do_aptget
         run: |
-          sudo apt-get install \
-          binfmt-support \
-          fdisk \
-          file \
-          kpartx \
-          lsof \
-          p7zip-full \
-          qemu-user-static \
-          unzip \
-          wget \
-          xz-utils \
-          units \ &&
-          echo " \
+            sudo apt-get install binfmt-support fdisk file kpartx lsof p7zip-full qemu-user-static unzip wget xz-utils units \
+            echo " 
             FROM 2018-11-13-raspbian-stretch-lite.img" \
             PUMP 100M \
             RUN raspi-config nonint do_serial 0 \
             RUN apt-get update \
             RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' \
             RUN apt-get install -y sl \
-            " > pilite.Pifile \ &&
-          sudo ./pimod.sh pilite.Pifile \ &&
-          dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \ &&
-          gh release upload ./Upgrade.img
+            " > pilite.Pifile \
+            sudo ./pimod.sh pilite.Pifile \
+            dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \
+            gh release upload ./Upgrade.img
