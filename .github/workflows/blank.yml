@@ -26,13 +26,13 @@ jobs:
           xz-utils \
           units \
           
-          echo "\n \
-            FROM 2018-11-13-raspbian-stretch-lite.img\n" \
-            PUMP 100M\n \
-            RUN raspi-config nonint do_serial 0\n \
-            RUN apt-get update\n \
-            RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade'\n \
-            RUN apt-get install -y sl \n \
+          echo " \
+            FROM 2018-11-13-raspbian-stretch-lite.img" \
+            PUMP 100M \
+            RUN raspi-config nonint do_serial 0 \
+            RUN apt-get update \
+            RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' \
+            RUN apt-get install -y sl \
             " > pilite.Pifile \
             
             sudo ./pimod.sh pilite.Pifile \ 
