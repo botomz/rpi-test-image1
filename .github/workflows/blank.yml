@@ -11,7 +11,7 @@ jobs:
           submodules: recursive
       - name: git_clone
         run: git clone https://github.com/Nature40/pimod.git
-      - name: apt-get
+      - name: do_apt-get
         run: |
           sudo apt-get install \
           binfmt-support \
@@ -24,9 +24,7 @@ jobs:
           unzip \
           wget \
           xz-utils \
-          units \
-    name: make_Pifile
-        run:|
+          units \ &&
           echo "<<EOF \
             FROM 2018-11-13-raspbian-stretch-lite.img" \
             PUMP 100M \
@@ -34,7 +32,7 @@ jobs:
             RUN apt-get update \
             RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' \
             RUN apt-get install -y sl \
-            EOF" > pilite.Pifile \
-            
-            sudo ./pimod.sh pilite.Pifile \ 
-            dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \
+            EOF" > pilite.Pifile \ &&
+          sudo ./pimod.sh pilite.Pifile \ &&
+          dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \ &&
+          gh release upload ./Upgrade.img
