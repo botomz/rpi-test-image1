@@ -25,7 +25,6 @@ jobs:
           wget \
           xz-utils \
           units \
-          |
     name: make_Pifile
         run:|
           echo "<<EOF \
