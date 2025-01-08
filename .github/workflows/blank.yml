@@ -24,16 +24,15 @@ jobs:
           unzip \
           wget \
           xz-utils \
-          units
+          units \
           
           echo "\n \
             FROM 2018-11-13-raspbian-stretch-lite.img\n" \
             PUMP 100M\n \
             RUN raspi-config nonint do_serial 0\n \
-            \n \
             RUN apt-get update\n \
             RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade'\n \
-            RUN apt-get install -y sl\n \
+            RUN apt-get install -y sl \n \
             " > pilite.Pifile \
             
             sudo ./pimod.sh pilite.Pifile \ 
