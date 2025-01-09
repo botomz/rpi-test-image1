@@ -10,10 +10,9 @@ jobs:
         with:
           submodules: recursive
       - name: git_clone
-        run: git clone https://github.com/Nature40/pimod.git
-      - name: do_aptget
+        run: git clone https://github.com/Nature40/pimod.git && sudo apt-get install binfmt-support fdisk file kpartx lsof p7zip-full qemu-user-static unzip wget xz-utils units \
+      - name: create_image
         run: |
-            sudo apt-get install binfmt-support fdisk file kpartx lsof p7zip-full qemu-user-static unzip wget xz-utils units \
             echo " 
             FROM 2018-11-13-raspbian-stretch-lite.img" \
             PUMP 100M \
