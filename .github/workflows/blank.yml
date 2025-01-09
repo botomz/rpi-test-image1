@@ -20,8 +20,7 @@ jobs:
               RUN apt-get install -y sl 
               " > pilite.Pifile
       - name: run_pimod
-        run: ls &&
-            cd pimod &&
+        run: cd pimod &&
             sudo ./pimod.sh pilite.Pifile &&
       - name: create_image
         run: dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
