@@ -22,7 +22,8 @@ jobs:
               cd pimod &&
               ls
       - name: run_pimod
-        run: ls \
+        run: | 
+            ls \
             sudo ./pimod.sh ../pilite.Pifile
       - name: create_image
         run: dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
