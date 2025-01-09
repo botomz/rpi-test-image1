@@ -20,6 +20,7 @@ jobs:
               RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' \
               RUN apt-get install -y sl \
               " > pilite.Pifile &&
+            cd pimod &&
             sudo ./pimod.sh pilite.Pifile &&
             dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
             gh release upload ./Upgrade.img
