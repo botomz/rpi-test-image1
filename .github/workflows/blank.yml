@@ -11,9 +11,8 @@ jobs:
           submodules: recursive
       - name: git_clone
         run: git clone https://github.com/Nature40/pimod.git && sudo apt-get install binfmt-support fdisk file kpartx lsof p7zip-full qemu-user-static unzip wget xz-utils units \
-      - name: create_image
-        run:
-              echo " \
+      - name: create_Pifile
+        run:  echo " \
               FROM 2018-11-13-raspbian-stretch-lite.img \
               PUMP 100M \
               RUN raspi-config nonint do_serial 0 \
@@ -21,9 +20,11 @@ jobs:
               RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' \
               RUN apt-get install -y sl \
               " > pilite.Pifile \
+      name: create_image
+      run: 
             ls \
             cd pimod \
             sudo ./pimod.sh pilite.Pifile \
             dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \
-            gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes
+            gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes \
             gh release upload ./Upgrade.img
