@@ -18,7 +18,7 @@ jobs:
               RUN apt-get update 
               RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' 
               RUN apt-get install -y sl 
-              " > pilite.Pifile &&
+              " > pilite.Pifile
       - name: run_pimod
         run: cd pimod &&
               ls &&
