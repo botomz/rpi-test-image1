@@ -23,9 +23,9 @@ jobs:
               " > pilite.Pifile
 
       - name: create_image
-        run: ls \
-            cd pimod \
-            sudo ./pimod.sh pilite.Pifile \
-            dd if=Upgrade.img of=/dev/sdc bs=4M status=progress \
-            gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes \
+        run: ls &&
+            cd pimod &&
+            sudo ./pimod.sh pilite.Pifile &&
+            dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
+            gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes &&
             gh release upload ./Upgrade.img
