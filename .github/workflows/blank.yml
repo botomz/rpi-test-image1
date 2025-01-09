@@ -7,10 +7,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
       - name: git_clone
         run: git clone https://github.com/Nature40/pimod.git && sudo apt-get install binfmt-support fdisk file kpartx lsof p7zip-full qemu-user-static unzip wget xz-utils units
-        
       - name: create_Pifile
         run:  | 
               echo " 
@@ -21,11 +19,11 @@ jobs:
               RUN bash -c 'DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade' 
               RUN apt-get install -y sl 
               " > pilite.Pifile
-
-      - name: create_image
+      - name: run_pimod
         run: ls &&
             cd pimod &&
             sudo ./pimod.sh pilite.Pifile &&
-            dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
+      - name: create_image
+        run: dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
             gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes &&
             gh release upload ./Upgrade.img
