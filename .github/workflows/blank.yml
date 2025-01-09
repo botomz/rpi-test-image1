@@ -22,7 +22,8 @@ jobs:
               cd pimod &&
               ls
       - name: run_pimod
-        run: sudo ./pimod.sh ../pilite.Pifile
+        run: ls \
+            sudo ./pimod.sh ../pilite.Pifile
       - name: create_image
         run: dd if=Upgrade.img of=/dev/sdc bs=4M status=progress &&
             gh release create "${VERSION}" --title "${VERSION} のリリースノート" --generate-notes &&
